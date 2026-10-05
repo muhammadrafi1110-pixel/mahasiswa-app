@@ -3,143 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Informasi Mahasiswa</title>
+
+    <title>Mahasiswa App</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background: #f4f7fb;
-            color: #1f2937;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            color: white;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed, #2563eb);
+            background-size: 300% 300%;
+            animation: gradient 10s ease infinite;
         }
 
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* NAVBAR */
+
         .navbar {
-            background: #111827;
-            padding: 18px 8%;
+            width: 100%;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            background: rgba(0, 0, 0, 0.20);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .logo {
-            color: white;
-            font-size: 22px;
+            font-size: 23px;
             font-weight: bold;
         }
 
-        .nav-link {
-            color: white;
+        .logo span {
+            color: #c4b5fd;
+        }
+
+        .nav-button {
             text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
+            color: white;
 
-        .nav-link:hover {
-            background: #374151;
-        }
+            padding: 11px 20px;
 
-        .hero {
-            min-height: 75vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .hero-content {
-            max-width: 750px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #e5e7eb;
-            color: #374151;
-            padding: 8px 16px;
             border-radius: 30px;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
 
-        h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #111827;
-        }
+            background: rgba(255, 255, 255, 0.15);
 
-        h1 span {
-            color: #2563eb;
-        }
+            border: 1px solid rgba(255, 255, 255, 0.3);
 
-        .description {
-            font-size: 18px;
-            line-height: 1.7;
-            color: #6b7280;
-            margin-bottom: 30px;
-        }
-
-        .button {
-            display: inline-block;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            padding: 14px 25px;
-            border-radius: 10px;
-            font-weight: bold;
             transition: 0.3s;
         }
 
-        .button:hover {
-            background: #1d4ed8;
+        .nav-button:hover {
+            background: white;
+            color: #4f46e5;
             transform: translateY(-2px);
         }
 
-        .info {
+        /* HERO */
+
+        .hero {
+            min-height: calc(100vh - 75px);
+
             display: flex;
             justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 70px 20px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 950px;
+        }
+
+        /* BADGE */
+
+        .badge {
+            display: inline-block;
+
+            padding: 10px 20px;
+
+            margin-bottom: 25px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            backdrop-filter: blur(10px);
+
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* TITLE */
+
+        h1 {
+            font-size: 60px;
+
+            line-height: 1.15;
+
+            margin-bottom: 25px;
+
+            font-weight: 800;
+
+            text-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 span {
+            color: #ddd6fe;
+        }
+
+        /* DESCRIPTION */
+
+        .description {
+            max-width: 700px;
+
+            margin: auto;
+
+            font-size: 18px;
+
+            line-height: 1.8;
+
+            color: rgba(255, 255, 255, 0.85);
+
+            margin-bottom: 35px;
+        }
+
+        /* MAIN BUTTON */
+
+        .main-button {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: white;
+
+            color: #4f46e5;
+
+            padding: 15px 30px;
+
+            border-radius: 12px;
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+
+            transition: 0.3s;
+        }
+
+        .main-button:hover {
+            transform: translateY(-5px) scale(1.02);
+
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: flex;
+
+            justify-content: center;
+
             gap: 20px;
+
             flex-wrap: wrap;
-            margin-top: 45px;
+
+            margin-top: 60px;
         }
 
         .card {
-            background: white;
-            width: 200px;
-            padding: 25px 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            width: 220px;
+
+            padding: 28px 20px;
+
+            border-radius: 18px;
+
+            background: rgba(255, 255, 255, 0.13);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+            transition: 0.3s;
         }
 
-        .card h3 {
-            font-size: 28px;
-            color: #2563eb;
-            margin-bottom: 8px;
+        .card:hover {
+            transform: translateY(-10px);
+
+            background: rgba(255, 255, 255, 0.20);
+        }
+
+        .icon {
+            font-size: 35px;
+
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 22px;
+
+            margin-bottom: 10px;
         }
 
         .card p {
-            color: #6b7280;
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            color: rgba(255, 255, 255, 0.75);
         }
+
+        /* FOOTER */
 
         footer {
             text-align: center;
+
             padding: 20px;
-            color: #6b7280;
-            font-size: 14px;
+
+            background: rgba(0, 0, 0, 0.18);
+
+            color: rgba(255, 255, 255, 0.7);
+
+            font-size: 13px;
         }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 36px;
-            }
+        /* RESPONSIVE */
+
+        @media (max-width: 700px) {
 
             .navbar {
-                padding: 15px 5%;
+                padding: 18px 5%;
+            }
+
+            h1 {
+                font-size: 42px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .navbar {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 34px;
             }
         }
     </style>
@@ -147,59 +300,128 @@
 
 <body>
 
-    <nav class="navbar">
-        <div class="logo">Mahasiswa App</div>
+    <!-- NAVBAR -->
 
-        <a href="{{ route('mahasiswa.index') }}" class="nav-link">
-            Data Mahasiswa
+    <nav class="navbar">
+
+        <div class="logo">
+            Mahasiswa <span>App</span>
+        </div>
+
+        <a
+            href="{{ route('mahasiswa.index') }}"
+            class="nav-button"
+        >
+            Data Mahasiswa →
         </a>
+
     </nav>
 
+
+    <!-- HERO -->
+
     <section class="hero">
-        <div class="hero-content">
+
+        <div class="content">
 
             <div class="badge">
-                Laravel 12 • Sistem Informasi
+                ✦ LARAVEL 12 • SISTEM INFORMASI
             </div>
 
+
             <h1>
-                Sistem Informasi <span>Mahasiswa</span>
+                Sistem Informasi
+                <span>Mahasiswa</span>
             </h1>
 
+
             <p class="description">
-                Selamat datang di Sistem Informasi Mahasiswa.
-                Aplikasi ini digunakan untuk mengelola data mahasiswa
-                dengan lebih mudah, cepat, dan terstruktur.
+                Selamat datang di Mahasiswa App.
+                Sebuah sistem informasi sederhana yang digunakan
+                untuk mengelola data mahasiswa secara mudah,
+                cepat, dan terstruktur.
             </p>
 
-            <a href="{{ route('mahasiswa.index') }}" class="button">
+
+            <a
+                href="{{ route('mahasiswa.index') }}"
+                class="main-button"
+            >
                 Kelola Data Mahasiswa →
             </a>
 
-            <div class="info">
+
+            <!-- CARDS -->
+
+            <div class="cards">
 
                 <div class="card">
-                    <h3>CRUD</h3>
-                    <p>Kelola data mahasiswa</p>
+
+                    <div class="icon">
+                        👨‍🎓
+                    </div>
+
+                    <h2>
+                        Mahasiswa
+                    </h2>
+
+                    <p>
+                        Mengelola informasi dan data
+                        mahasiswa dengan lebih terstruktur.
+                    </p>
+
                 </div>
 
-                <div class="card">
-                    <h3>MySQL</h3>
-                    <p>Database terintegrasi</p>
-                </div>
 
                 <div class="card">
-                    <h3>Laravel</h3>
-                    <p>Framework Laravel 12</p>
+
+                    <div class="icon">
+                        🗄️
+                    </div>
+
+                    <h2>
+                        MySQL
+                    </h2>
+
+                    <p>
+                        Data tersimpan dengan aman
+                        menggunakan database MySQL.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">
+                        ⚡
+                    </div>
+
+                    <h2>
+                        Laravel 12
+                    </h2>
+
+                    <p>
+                        Sistem dibangun menggunakan
+                        framework Laravel versi 12.
+                    </p>
+
                 </div>
 
             </div>
 
         </div>
+
     </section>
 
+
+    <!-- FOOTER -->
+
     <footer>
-        © 2026 Sistem Informasi Mahasiswa
+
+        © 2026 Mahasiswa App
+        • Laravel 12
+
     </footer>
 
 </body>
